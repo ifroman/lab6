@@ -11,12 +11,20 @@ $(document).ready(function() {
 function initializePage() {
 	$('.project a').click(addProjectDetails);
 
-	$('#colorBtn').click(randomizeColors);
+//	$('#colorBtn').click(randomizeColors);
 }
 
 /*
  * Make an AJAX call to retrieve project details and add it in
  */
+
+function callBackFn(result){
+console.log(result);
+
+$this(".details").html(result);
+
+}
+
 function addProjectDetails(e) {
 	// Prevent following the link
 	e.preventDefault();
@@ -27,6 +35,9 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+
+		$.get("http://localhost:3000/project/" + idNumber, callBackFn);
+
 }
 
 
